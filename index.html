@@ -1,86 +1,237 @@
-
 <!doctype html>
 <html lang="zh-Hant">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#0f766e">
+<meta name="theme-color" content="#050816">
 <meta name="description" content="115學年度臺北市幼兒園聯絡資料查詢，提供園所、召集園與學前教育科業務窗口資訊。">
 <title>115學年度臺北市幼兒園聯絡資料查詢</title>
 <style>
 :root{
-  --bg:#f4f8f7;--surface:#ffffff;--surface-2:#eef6f4;--ink:#18312e;--muted:#55706c;
-  --line:#c9dad6;--accent:#0f766e;--accent-2:#115e59;--accent-soft:#dff3ee;
-  --focus:#f59e0b;--shadow:0 12px 34px rgba(20,55,50,.10);--shadow-hover:0 20px 46px rgba(20,55,50,.16);
-  --radius:20px;--max:1420px;
+  --space-1:#050816;
+  --space-2:#0a0f2a;
+  --space-3:#11183b;
+  --surface:rgba(12,18,49,.88);
+  --surface-strong:rgba(15,22,58,.96);
+  --ink:#f6f7ff;
+  --muted:#b9c1e6;
+  --subtle:#8f99c7;
+  --line:rgba(173,188,255,.20);
+  --line-strong:rgba(183,201,255,.38);
+  --accent:#8b7cff;
+  --accent-2:#60a5fa;
+  --accent-3:#d8b4fe;
+  --focus:#fbbf24;
+  --good:#9fd7ff;
+  --danger:#ffd7e7;
+  --shadow:0 18px 55px rgba(0,0,0,.34);
+  --shadow-hover:0 26px 80px rgba(72,48,155,.34);
+  --radius:22px;
+  --max:1460px;
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;color:var(--ink);background:linear-gradient(180deg,#f7fbfa 0%,var(--bg) 35%,#eef5f3 100%);font-family:"Microsoft JhengHei","Noto Sans TC",system-ui,sans-serif;font-size:19px;line-height:1.7;min-height:100vh}
-body:before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(circle at 10% 10%,rgba(15,118,110,.07),transparent 28%),radial-gradient(circle at 90% 10%,rgba(245,158,11,.07),transparent 24%);z-index:-1}
-a{color:var(--accent-2);text-underline-offset:3px;text-decoration-thickness:2px}
-a:hover{color:var(--accent);}
+html{scroll-behavior:smooth;background:var(--space-1)}
+body{
+  margin:0;
+  color:var(--ink);
+  background:
+    radial-gradient(circle at 12% 12%,rgba(96,165,250,.13),transparent 22%),
+    radial-gradient(circle at 84% 18%,rgba(139,124,255,.17),transparent 27%),
+    radial-gradient(circle at 68% 72%,rgba(168,85,247,.12),transparent 26%),
+    linear-gradient(180deg,#030512 0%,#070b20 36%,#0a1030 100%);
+  font-family:"Microsoft JhengHei","Noto Sans TC",system-ui,sans-serif;
+  font-size:19px;
+  line-height:1.72;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+body::before,
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:-4;
+}
+body::before{
+  background-image:
+    radial-gradient(circle at 14% 22%,rgba(255,255,255,.95) 0 1px,transparent 1.7px),
+    radial-gradient(circle at 72% 15%,rgba(198,216,255,.8) 0 1.2px,transparent 2px),
+    radial-gradient(circle at 48% 66%,rgba(255,255,255,.72) 0 .9px,transparent 1.6px),
+    radial-gradient(circle at 89% 74%,rgba(187,196,255,.65) 0 1px,transparent 1.8px),
+    radial-gradient(circle at 35% 87%,rgba(255,255,255,.65) 0 .8px,transparent 1.5px);
+  background-size:180px 180px,240px 240px,210px 210px,270px 270px,230px 230px;
+  animation:driftStars 38s linear infinite;
+  opacity:.62;
+}
+body::after{
+  background:
+    radial-gradient(ellipse at 20% 55%,rgba(74,0,224,.18),transparent 38%),
+    radial-gradient(ellipse at 78% 46%,rgba(0,151,255,.14),transparent 34%);
+  filter:blur(8px);
+}
+@keyframes driftStars{from{transform:translate3d(0,0,0)}to{transform:translate3d(-60px,-80px,0)}}
+@keyframes nebulaPulse{0%,100%{opacity:.46;transform:scale(1)}50%{opacity:.7;transform:scale(1.06)}}
+@keyframes starSweep{0%{transform:translateX(-150%) rotate(-18deg);opacity:0}12%{opacity:.95}30%,100%{transform:translateX(160%) rotate(-18deg);opacity:0}}
+@keyframes riseIn{from{opacity:0;transform:translateY(18px) scale(.985)}to{opacity:1;transform:none}}
+@keyframes glowIn{0%{box-shadow:0 0 0 rgba(139,124,255,0)}100%{box-shadow:0 0 34px rgba(139,124,255,.16)}}
+
+a{color:#b9cfff;text-underline-offset:4px;text-decoration-thickness:2px}
+a:hover{color:#fff}
 button,input,select{font:inherit}
-button,input,select{border:2px solid var(--line);border-radius:14px;min-height:54px}
+button,input,select{border:2px solid var(--line);border-radius:15px;min-height:56px}
 button{cursor:pointer}
 button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:4px solid var(--focus);outline-offset:3px}
-.skip-link{position:fixed;top:-100px;left:16px;z-index:9999;background:#fff;color:var(--ink);padding:12px 18px;border-radius:12px;box-shadow:var(--shadow);font-weight:900}
+.skip-link{position:fixed;top:-120px;left:16px;z-index:9999;background:#fff;color:#11162d;padding:13px 18px;border-radius:14px;box-shadow:var(--shadow);font-weight:900}
 .skip-link:focus{top:16px}
-.site-header{position:relative;overflow:hidden;background:linear-gradient(135deg,#0e4f4b 0%,#0f766e 58%,#1c9b8e 100%);color:#fff;border-bottom:1px solid rgba(255,255,255,.18)}
-.site-header:after{content:"";position:absolute;inset:auto -10% -60px;height:150px;background:rgba(255,255,255,.10);border-radius:50%;transform:rotate(-4deg)}
-.header-inner{max-width:var(--max);margin:auto;padding:38px 24px 32px;position:relative;z-index:1}
-.eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:17px;font-weight:900;letter-spacing:.08em;background:rgba(255,255,255,.14);padding:7px 13px;border-radius:999px;border:1px solid rgba(255,255,255,.26);margin-bottom:14px}
-h1{font-size:clamp(32px,4vw,50px);line-height:1.2;margin:0 0 12px;letter-spacing:.01em}
-.subtitle{font-size:22px;max-width:920px;margin:0;color:rgba(255,255,255,.92)}
-.header-hint{margin-top:18px;font-size:18px;color:rgba(255,255,255,.9)}
-.tabs-wrap{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);box-shadow:0 5px 18px rgba(24,49,46,.08)}
-.tabs{max-width:var(--max);margin:auto;padding:10px 24px;display:flex;gap:10px;overflow:auto}
-.tab{flex:0 0 auto;background:transparent;color:var(--muted);padding:13px 20px;font-weight:900;border-color:transparent;min-height:52px}
-.tab:hover{background:var(--surface-2);color:var(--accent-2)}
-.tab.active{background:var(--accent-soft);color:var(--accent-2);border-color:#9acfc7;box-shadow:inset 0 -3px 0 var(--accent)}
-main{max-width:var(--max);margin:auto;padding:28px 24px 100px}
-.panel{display:none}.panel.active{display:block;animation:panelIn .42s ease both}
-.section-heading{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:15px;margin-bottom:18px}
-h2{font-size:34px;line-height:1.25;margin:0}.lead{font-size:19px;color:var(--muted);margin:0}
-.search-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);margin-bottom:18px}
-.search-grid{display:grid;grid-template-columns:minmax(320px,1.45fr) minmax(180px,.55fr) minmax(220px,.65fr) auto;gap:12px;align-items:end}
-.field{display:flex;flex-direction:column;gap:7px}.field label{font-weight:900;font-size:18px}
-.field input,.field select{width:100%;padding:0 15px;background:#fff;color:var(--ink)}
-.search-input{min-height:58px;font-size:21px}.reset-btn{padding:0 19px;background:#f0f7f6;color:var(--accent-2);font-weight:900;border-color:#aad1ca;white-space:nowrap}
-.reset-btn:hover{background:var(--accent-soft)}
-.status-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:14px 2px 18px;font-size:19px;color:var(--muted)}
-.status-pill{display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border-radius:999px;background:#e7f4f1;color:var(--accent-2);font-weight:900}
-.status-pill strong{font-size:22px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+.site-header{
+  position:relative;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 78% 16%,rgba(96,165,250,.18),transparent 22%),
+    radial-gradient(circle at 26% 12%,rgba(139,124,255,.22),transparent 24%),
+    linear-gradient(135deg,#040611 0%,#0a1030 54%,#171041 100%);
+  color:#fff;
+  border-bottom:1px solid rgba(182,195,255,.18);
+  box-shadow:0 18px 60px rgba(0,0,0,.32);
+}
+.site-header::before{content:"";position:absolute;inset:-20% -10% auto;height:420px;background:radial-gradient(ellipse,rgba(139,124,255,.22),transparent 60%);filter:blur(24px);animation:nebulaPulse 9s ease-in-out infinite}
+.site-header::after{content:"";position:absolute;top:28px;left:-25%;width:55%;height:2px;background:linear-gradient(90deg,transparent,rgba(210,220,255,.9),transparent);box-shadow:0 0 12px rgba(183,201,255,.55);animation:starSweep 10s ease-in-out infinite 1.2s}
+.header-inner{max-width:var(--max);margin:auto;padding:46px 28px 38px;position:relative;z-index:1}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:17px;font-weight:900;letter-spacing:.1em;background:rgba(139,124,255,.14);padding:8px 14px;border-radius:999px;border:1px solid rgba(196,182,255,.25);margin-bottom:16px;box-shadow:0 0 24px rgba(139,124,255,.12)}
+h1{font-size:clamp(34px,5vw,58px);line-height:1.16;margin:0 0 14px;letter-spacing:.015em;text-shadow:0 0 32px rgba(146,133,255,.18)}
+.subtitle{font-size:22px;max-width:980px;margin:0;color:rgba(245,247,255,.93)}
+.header-hint{margin-top:18px;font-size:18px;color:rgba(219,225,255,.88)}
+
+.tabs-wrap{position:sticky;top:0;z-index:50;background:rgba(4,7,23,.84);backdrop-filter:blur(18px);border-bottom:1px solid var(--line);box-shadow:0 10px 28px rgba(0,0,0,.24)}
+.tabs{max-width:var(--max);margin:auto;padding:10px 28px;display:flex;gap:10px;overflow-x:auto;scrollbar-width:thin}
+.tab{flex:0 0 auto;background:transparent;color:#bbc3e7;padding:13px 21px;font-weight:900;border-color:transparent;min-height:54px;white-space:nowrap}
+.tab:hover{background:rgba(139,124,255,.10);color:#fff}
+.tab.active{background:linear-gradient(135deg,rgba(139,124,255,.22),rgba(96,165,250,.14));color:#fff;border-color:rgba(174,159,255,.34);box-shadow:inset 0 -3px 0 var(--accent),0 0 24px rgba(139,124,255,.12)}
+
+main{max-width:var(--max);margin:auto;padding:32px 28px 110px}
+.panel{display:none;scroll-margin-top:104px}.panel.active{display:block;animation:riseIn .42s ease both}
+.section-heading{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:20px}
+h2{font-size:clamp(28px,3vw,38px);line-height:1.2;margin:0 0 8px}
+.lead{margin:0;color:var(--muted);font-size:19px}
+
+.search-card,.info-card,.conv-card,.staff-card,.school-card,.empty,.status-shell{
+  background:linear-gradient(145deg,rgba(16,23,62,.92),rgba(9,14,39,.94));
+  border:1px solid var(--line);
+  box-shadow:var(--shadow);
+}
+.search-card{border-radius:24px;padding:20px;margin-bottom:18px;position:relative;overflow:hidden}
+.search-card::after{content:"";position:absolute;inset:-40% auto auto -10%;width:55%;height:180%;background:radial-gradient(ellipse,rgba(139,124,255,.10),transparent 67%);transform:rotate(-17deg);pointer-events:none}
+.search-grid{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1.6fr) minmax(180px,.7fr) minmax(220px,.8fr) auto;gap:14px;align-items:end}
+.field{display:flex;flex-direction:column;gap:8px;min-width:0}
+.field label{font-size:18px;font-weight:900;color:#e7eaff}
+input,select{width:100%;background:rgba(3,7,25,.84);color:#fff;padding:0 15px;border-color:rgba(173,188,255,.26)}
+input::placeholder{color:#8791bb;opacity:1}
+input:hover,select:hover{border-color:rgba(179,164,255,.52)}
+input:focus,select:focus{border-color:rgba(154,137,255,.95);box-shadow:0 0 0 5px rgba(139,124,255,.10)}
+.reset-btn{padding:0 18px;background:linear-gradient(135deg,rgba(96,165,250,.12),rgba(139,124,255,.13));color:#f3f5ff;font-weight:900;border-color:rgba(164,177,255,.28);white-space:nowrap}
+.reset-btn:hover{transform:translateY(-1px);box-shadow:0 12px 26px rgba(0,0,0,.23)}
+.tips{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:14px;position:relative;z-index:1}
+.tip{padding:13px 14px;border-radius:16px;background:rgba(255,255,255,.035);border:1px solid rgba(184,196,255,.12);display:flex;flex-direction:column;gap:2px}
+.tip strong{font-size:17px;color:#fff}.tip span{font-size:16px;color:var(--muted)}
+.status-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 2px 16px;color:var(--muted);font-size:17px}
+.status-pill{display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:999px;background:rgba(139,124,255,.11);border:1px solid rgba(170,157,255,.23);color:#e5e9ff;font-weight:800}
+.status-pill strong{font-size:21px;color:#fff}
+
 .card-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
-.school-card,.info-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
-.school-card{position:relative;isolation:isolate;transition:transform .28s ease,box-shadow .28s ease,border-color .28s ease}
-.school-card:before{content:"";position:absolute;left:0;top:0;bottom:0;width:8px;background:linear-gradient(180deg,#0f766e,#54b8ab,#f59e0b);opacity:.95}
-.school-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-hover);border-color:#9ccfc7}
-.card-top{padding:22px 22px 8px 28px;display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
-.school-name{font-size:25px;line-height:1.35;font-weight:950;margin:0}
-.badges{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}.badge{display:inline-flex;align-items:center;padding:6px 11px;border-radius:999px;background:var(--accent-soft);color:var(--accent-2);font-size:16px;font-weight:900;white-space:nowrap}
-.card-body{padding:8px 22px 22px 28px}.data-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px 18px;margin-top:10px}
-.data-item{border-top:1px dashed var(--line);padding-top:9px;min-width:0}.data-label{display:block;font-size:16px;color:var(--muted);font-weight:800;margin-bottom:2px}.data-value{display:block;font-size:19px;word-break:break-word}.data-value a{font-weight:900}
-.data-item.full{grid-column:1/-1}.address-link{display:inline-flex;align-items:flex-start;gap:8px}
-.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}.action-link{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 14px;border-radius:12px;background:#f2f8f7;border:2px solid #bad6d1;text-decoration:none;font-weight:900}.action-link:hover{background:var(--accent-soft)}
-.empty{background:var(--surface);border:2px dashed #abcac5;border-radius:var(--radius);padding:44px 24px;text-align:center;color:var(--muted);font-size:21px;display:none}
-.pagination{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:9px;margin-top:24px}.page-btn{min-width:50px;padding:0 13px;background:#fff;color:var(--ink);font-weight:900}.page-btn.current{background:var(--accent);color:#fff;border-color:var(--accent)}.page-btn:disabled{cursor:not-allowed;opacity:.48}
-.page-ellipsis{min-width:24px;text-align:center;font-weight:900;color:var(--muted)}
-.info-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.info-card{padding:22px}.info-card h3{font-size:24px;margin:0 0 10px}.info-card p{margin:8px 0;color:var(--muted)}
-.conv-list{display:grid;gap:16px}.conv-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;box-shadow:var(--shadow);transition:transform .25s ease,box-shadow .25s ease}.conv-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-hover)}
-.conv-card h3{font-size:24px;line-height:1.35;margin:0 0 10px}.conv-meta{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 18px}.conv-meta>div{border-top:1px dashed var(--line);padding-top:8px}.type-tag{display:inline-flex;padding:5px 10px;border-radius:999px;background:#fff4d8;color:#8a5b00;font-size:16px;font-weight:900}
-.staff-tools{margin-bottom:18px}.staffq{width:min(720px,100%);min-height:58px;padding:0 15px;font-size:20px;background:#fff}
-.staff-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}.staff-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:var(--shadow)}.staff-card h3{font-size:23px;margin:0 0 3px}.staff-card .muted{color:var(--muted);font-size:18px}.ext{display:inline-flex;margin-top:10px;padding:6px 11px;border-radius:999px;background:var(--accent-soft);color:var(--accent-2);font-weight:900}
-.tips{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px}.tip{background:rgba(255,255,255,.74);border:1px solid var(--line);border-radius:16px;padding:15px}.tip strong{display:block;font-size:18px}.tip span{display:block;color:var(--muted);font-size:17px}
-.top-btn{position:fixed;right:22px;bottom:22px;z-index:60;min-width:62px;min-height:62px;border-radius:50%;background:#0f766e;color:#fff;border:3px solid rgba(255,255,255,.9);box-shadow:0 16px 28px rgba(15,118,110,.28);font-size:18px;font-weight:950;display:none;align-items:center;justify-content:center}.top-btn.show{display:flex;animation:floatIn .25s ease both}.top-btn:hover{background:#115e59}
-.sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
-@keyframes panelIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-@keyframes floatIn{from{opacity:0;transform:translateY(12px) scale(.9)}to{opacity:1;transform:none}}
-@keyframes shimmer{0%{transform:translateX(-120%)}100%{transform:translateX(120%)}}
-@media (prefers-reduced-motion:no-preference){.school-card:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.28) 48%,transparent 68%);transform:translateX(-120%);opacity:0}.school-card:hover:after{opacity:1;animation:shimmer 1.1s ease}.top-btn{animation:none}}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.panel.active{animation:none}.school-card,.conv-card{transition:none}}
-@media (max-width:1080px){.search-grid{grid-template-columns:1fr 1fr}.search-grid .field:first-child{grid-column:1/-1}.search-grid .reset-btn{grid-column:1/-1;justify-self:start}.card-grid,.info-grid,.staff-list{grid-template-columns:1fr}.tips{grid-template-columns:1fr}}
-@media (max-width:720px){body{font-size:18px}.header-inner,main{padding-left:15px;padding-right:15px}.header-inner{padding-top:30px;padding-bottom:26px}.subtitle{font-size:20px}.tabs{padding-left:15px;padding-right:15px}.tabs-wrap{position:sticky}.section-heading{align-items:flex-start}.section-heading h2,h2{font-size:29px}.search-grid{grid-template-columns:1fr}.search-grid .field:first-child,.search-grid .reset-btn{grid-column:auto}.data-grid,.conv-meta{grid-template-columns:1fr}.data-item.full{grid-column:auto}.school-name,.conv-card h3{font-size:22px}.card-top{display:block}.badges{justify-content:flex-start;margin-top:10px}.top-btn{right:14px;bottom:14px}}
+.school-card{position:relative;border-radius:22px;padding:0;overflow:hidden;isolation:isolate;transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease;animation:riseIn .55s ease both}
+.school-card::before{content:"";position:absolute;inset:0 0 auto;height:4px;background:linear-gradient(90deg,var(--accent),var(--accent-2),var(--accent-3));opacity:.95;box-shadow:0 0 20px rgba(139,124,255,.34)}
+.school-card::after{content:"";position:absolute;right:-60px;top:-60px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(139,124,255,.14),transparent 70%);pointer-events:none}
+.school-card:hover{transform:translateY(-5px);border-color:rgba(169,156,255,.42);box-shadow:var(--shadow-hover)}
+.card-top{padding:22px 22px 18px;border-bottom:1px solid rgba(173,188,255,.13)}
+.school-name{margin:0 0 10px;font-size:clamp(23px,2.2vw,30px);line-height:1.35;letter-spacing:.01em;color:#fff;text-wrap:balance}
+.badges{display:flex;gap:8px;flex-wrap:wrap}.badge{display:inline-flex;align-items:center;min-height:36px;padding:3px 11px;border-radius:999px;font-size:16px;font-weight:900;color:#dce3ff;background:rgba(96,165,250,.09);border:1px solid rgba(140,166,255,.22)}
+.card-body{padding:18px 22px 20px}
+.data-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 18px}
+.data-item{min-width:0}.data-item.full{grid-column:1/-1}
+.data-label{display:block;color:#94a0cb;font-size:16px;font-weight:800;margin-bottom:3px}.data-value{display:block;color:#f5f7ff;font-size:19px;line-height:1.55;overflow-wrap:anywhere}
+.address-link{display:block}.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}.action-link{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:8px 14px;border-radius:13px;background:rgba(139,124,255,.10);border:1px solid rgba(164,151,255,.25);font-weight:900;color:#edf0ff;text-decoration:none}.action-link:hover{background:rgba(139,124,255,.20);color:#fff}
+
+.empty{border-radius:20px;text-align:center;padding:46px 22px;color:var(--muted);font-size:19px}
+.pagination{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px;margin-top:24px}
+.page-btn{min-width:48px;min-height:48px;padding:0 12px;background:rgba(10,16,43,.9);color:#dde3ff;border-color:rgba(174,188,255,.2);font-weight:900}
+.page-btn:hover:not(:disabled){background:rgba(139,124,255,.15);border-color:rgba(174,160,255,.42)}
+.page-btn.current{background:linear-gradient(135deg,rgba(139,124,255,.34),rgba(96,165,250,.20));border-color:rgba(183,167,255,.52);color:#fff;box-shadow:0 0 20px rgba(139,124,255,.15)}
+.page-btn:disabled{opacity:.42;cursor:not-allowed}.page-ellipsis{padding:0 3px;color:#8b95bf;font-size:22px}
+
+.conv-list,.staff-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.conv-card,.staff-card,.info-card{border-radius:20px;padding:20px;transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease}
+.conv-card:hover,.staff-card:hover,.info-card:hover{transform:translateY(-4px);border-color:rgba(169,156,255,.40);box-shadow:var(--shadow-hover)}
+.type-tag{display:inline-flex;padding:5px 10px;border-radius:999px;background:rgba(96,165,250,.09);border:1px solid rgba(145,166,255,.22);color:#dce4ff;font-size:16px;font-weight:900;margin-bottom:10px}
+.conv-card h3,.staff-card h3,.info-card h3{margin:0 0 12px;font-size:23px;line-height:1.4;color:#fff}
+.conv-meta{display:grid;grid-template-columns:1fr 1fr;gap:13px 18px}.conv-meta>div{min-width:0}.conv-meta .full{grid-column:1/-1}
+.info-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-bottom:18px}.info-card p{margin:7px 0;font-size:18px;color:#d8ddf8}.staff-tools{margin-bottom:16px}.staffq{max-width:760px}
+.ext{margin-top:12px;display:inline-flex;padding:8px 12px;border-radius:12px;background:rgba(139,124,255,.10);border:1px solid rgba(166,151,255,.22);font-weight:900;color:#eef0ff}
+
+.top-btn{position:fixed;right:24px;bottom:24px;z-index:60;width:60px;height:60px;border-radius:50%;border:1px solid rgba(202,210,255,.35);background:linear-gradient(145deg,rgba(139,124,255,.94),rgba(72,93,194,.92));color:#fff;font-size:30px;font-weight:900;box-shadow:0 14px 36px rgba(0,0,0,.34),0 0 26px rgba(139,124,255,.22);opacity:0;transform:translateY(16px) scale(.92);pointer-events:none;transition:opacity .2s ease,transform .2s ease}
+.top-btn.show{opacity:1;transform:none;pointer-events:auto}.top-btn:hover{transform:translateY(-3px)}
+
+@media (max-width:1100px){
+  .header-inner{padding-left:22px;padding-right:22px}
+  main{padding-left:22px;padding-right:22px}
+  .search-grid{grid-template-columns:1fr 1fr}
+  .field:first-child{grid-column:1/-1}
+  .reset-btn{width:100%}
+  .tips{grid-template-columns:1fr}
+  .card-grid,.conv-list,.staff-list,.info-grid{grid-template-columns:1fr}
+}
+@media (max-width:720px){
+  body{font-size:18px}
+  .header-inner{padding:32px 16px 28px}
+  h1{font-size:clamp(31px,8.6vw,44px)}
+  .subtitle{font-size:20px;line-height:1.6}
+  .header-hint{font-size:17px}
+  .tabs{padding:8px 12px}
+  .tab{min-height:50px;padding:11px 15px;font-size:17px}
+  main{padding:24px 14px 96px}
+  .panel{scroll-margin-top:84px}
+  .section-heading{margin-bottom:16px}
+  h2{font-size:29px}
+  .lead{font-size:18px}
+  .search-card{padding:15px;border-radius:19px}
+  .search-grid{grid-template-columns:1fr;gap:11px}
+  .field:first-child{grid-column:auto}
+  .field label{font-size:17px}
+  input,select,button{min-height:54px}
+  .tips{gap:8px}
+  .tip{padding:11px 12px}.tip span{font-size:15px}
+  .status-row{align-items:flex-start;flex-direction:column;gap:8px;margin-bottom:13px}
+  .card-grid{gap:14px}
+  .school-card{border-radius:18px}
+  .card-top{padding:18px 17px 15px}.card-body{padding:15px 17px 17px}
+  .school-name{font-size:25px}
+  .badges{gap:6px}.badge{font-size:15px;min-height:34px}
+  .data-grid{grid-template-columns:1fr;gap:11px}
+  .data-item.full{grid-column:auto}
+  .data-label{font-size:15px}.data-value{font-size:18px}
+  .actions{display:grid;grid-template-columns:1fr 1fr}
+  .action-link{min-height:50px;font-size:16px}
+  .conv-card,.staff-card,.info-card{padding:17px;border-radius:18px}
+  .conv-meta{grid-template-columns:1fr}
+  .conv-meta .full{grid-column:auto}
+  .conv-card h3,.staff-card h3,.info-card h3{font-size:22px}
+  .pagination{gap:6px}.page-btn{min-width:46px;min-height:46px;padding:0 10px;font-size:16px}
+  .top-btn{right:14px;bottom:14px;width:56px;height:56px}
+}
+@media (max-width:430px){
+  .eyebrow{font-size:15px}.header-inner{padding-top:26px}
+  .subtitle{font-size:19px}
+  .actions{grid-template-columns:1fr}
+  .actions .action-link{width:100%}
+  .school-name{font-size:23px}
+  .page-btn{font-size:15px}.page-btn:first-child,.page-btn:last-child{padding:0 9px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.001ms!important}
+  .school-card:hover,.conv-card:hover,.staff-card:hover,.info-card:hover,.top-btn:hover{transform:none}
+}
 </style>
 </head>
 <body>
@@ -119,7 +270,7 @@ h2{font-size:34px;line-height:1.25;margin:0}.lead{font-size:19px;color:var(--mut
   </section>
   <section id="conveners" class="panel" aria-labelledby="conv-title">
     <div class="section-heading"><div><h2 id="conv-title">各行政區召集園</h2><p class="lead">包含公幼召集園及私幼召集園。</p></div></div>
-    <div id="convList" class="conv-list"></div>
+    <div class="status-row" aria-live="polite"><span class="status-pill">目前資料 <strong id="convCount">0</strong> 筆</span><span id="convPageStatus">第 1 頁</span></div><div id="convList" class="conv-list"></div><nav id="convPagination" class="pagination" aria-label="召集園資料分頁"></nav>
   </section>
   <section id="staff" class="panel" aria-labelledby="staff-title">
     <div class="section-heading"><div><h2 id="staff-title">學前教育科業務執掌</h2><p class="lead">可搜尋行政區、業務名稱、承辦人或分機。</p></div></div>
@@ -130,7 +281,7 @@ h2{font-size:34px;line-height:1.25;margin:0}.lead{font-size:19px;color:var(--mut
     <div class="staff-tools"><label class="sr-only" for="staffQ">搜尋學前教育科業務</label><input id="staffQ" class="staffq" type="search" autocomplete="off" placeholder="例如：幼兒園、稽查、某位承辦人、1417…"></div>
     <div class="status-row" aria-live="polite"><span class="status-pill">符合條件 <strong id="staffCount">0</strong> 筆</span></div>
     <div id="staffList" class="staff-list"></div>
-    <div id="staffEmpty" class="empty" role="status">找不到符合條件的業務窗口。</div>
+    <div id="staffEmpty" class="empty" role="status">找不到符合條件的業務窗口。</div><nav id="staffPagination" class="pagination" aria-label="學前教育科資料分頁"></nav>
   </section>
 </main>
 <button id="topBtn" class="top-btn" type="button" aria-label="回到頁面頂端" title="回到頁面頂端">↑<span class="sr-only">回頂端</span></button>
@@ -139,31 +290,148 @@ h2{font-size:34px;line-height:1.25;margin:0}.lead{font-size:19px;color:var(--mut
 <script id="staffData" type="application/json">[{"duty":"科長","name":"楊鎮鴻","ext":"1417"},{"duty":"專員","name":"闕慧慈","ext":"1417"},{"duty":"書記","name":"蔡宇謙","ext":"27593381"},{"duty":"第一股股長","name":"林思均","ext":"1415"},{"duty":"第二股股長","name":"張為珞","ext":"6382"},{"duty":"第三股股長","name":"施佳儀","ext":"1416"},{"duty":"工讀生","name":"林子恩","ext":"6381"},{"duty":"工讀生","name":"待補","ext":"1244"},{"duty":"工讀生","name":"卓奕辰","ext":"27593381(1244)"},{"duty":"第一股","name":"","ext":""},{"duty":"科員","name":"吳小鳳","ext":"1415"},{"duty":"科員（大安）","name":"簡鈺芳","ext":"6389"},{"duty":"稽查員","name":"王建罡","ext":"1088"},{"duty":"約聘輔導員","name":"吳怡蓁","ext":"1432"},{"duty":"專案助理","name":"藍黎枝","ext":"1244"},{"duty":"專案助理","name":"謝采瑧","ext":"1245"},{"duty":"專案助理","name":"李欣穎","ext":"1433"},{"duty":"專案助理","name":"王建承","ext":"1088"},{"duty":"專案助理","name":"黃佩于","ext":"1432"},{"duty":"專案助理","name":"侯宇薇","ext":"1088"},{"duty":"支援教師","name":"顧佩玲","ext":"1434"},{"duty":"支援教師","name":"陳建榕","ext":"1244"},{"duty":"約聘輔導員","name":"蔡旻諺","ext":"6389"},{"duty":"辦事員（松山、大同）","name":"蕭名芳","ext":"1432"},{"duty":"助理員（內湖）","name":"李珮瑜","ext":"1088"},{"duty":"第二股","name":"","ext":""},{"duty":"科員（市立、中正）","name":"薛晏蓁","ext":"6381"},{"duty":"科員（南港）","name":"詹孟潔","ext":"6382"},{"duty":"支援老師（士林）","name":"施嘉琪","ext":"27593381"},{"duty":"約聘輔導員（北投）","name":"莊景竣","ext":"6381"},{"duty":"約聘督導員","name":"黃念超","ext":"6383"},{"duty":"支援教師（士林）","name":"陳思涵","ext":"6383"},{"duty":"支援教師（文山）","name":"張雅婷","ext":"6387"},{"duty":"專案助理","name":"王鈞平","ext":"6381"},{"duty":"稽查員","name":"莎菈柔恩","ext":"27593381"},{"duty":"支援教師","name":"吳亞豈","ext":"6383"},{"duty":"第三股","name":"","ext":""},{"duty":"科員（中山–公私非）","name":"楊雅婷","ext":"6388"},{"duty":"約聘輔導員 （萬華–公私非）","name":"李驍尹","ext":"1244"},{"duty":"科員（信義–公私非）","name":"曾文欣","ext":"1087"},{"duty":"專案助理 （大安–非）","name":"待補","ext":"1087"},{"duty":"專案助理 （南港、內湖–非）","name":"江芝岑","ext":"27593376"},{"duty":"支援教師（北投、士林–非）","name":"蔡瑜汶","ext":"27593376"},{"duty":"約聘輔導員  （松山、中正、大同–非）","name":"徐蘅","ext":"1087"},{"duty":"約聘輔導員 （文山–非）","name":"王思涵","ext":"6388"},{"duty":"稽查員","name":"麥薰元","ext":"1416"}]</script>
 <script>
 "use strict";
-const SCHOOLS=JSON.parse(document.getElementById("schoolsData").textContent);
-const CONVENERS=JSON.parse(document.getElementById("convData").textContent);
-const STAFF=JSON.parse(document.getElementById("staffData").textContent);
-const PAGE_SIZE=20;
-const els={q:document.getElementById("q"),district:document.getElementById("district"),category:document.getElementById("category"),reset:document.getElementById("reset"),schoolCards:document.getElementById("schoolCards"),schoolEmpty:document.getElementById("schoolEmpty"),count:document.getElementById("count"),pageStatus:document.getElementById("pageStatus"),schoolPagination:document.getElementById("schoolPagination"),convList:document.getElementById("convList"),staffQ:document.getElementById("staffQ"),staffList:document.getElementById("staffList"),staffEmpty:document.getElementById("staffEmpty"),staffCount:document.getElementById("staffCount"),topBtn:document.getElementById("topBtn")};
-let schoolPage=1;
-const norm=s=>String(s??"").toLowerCase().replace(/\s+/g,"").replace(/[（）()\-\s]/g,"");
-const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const tel=s=>"tel:"+String(s||"").replace(/[^0-9+]/g,"");
-const map=s=>"https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(s||"");
-function infoItem(label,value,cls=""){return `<div class="data-item ${cls}"><span class="data-label">${esc(label)}</span><span class="data-value">${value}</span></div>`}
-function schoolCard(r,i){const phone=r.phone?`<a href="${tel(r.phone)}" aria-label="撥打${esc(r.name)}電話 ${esc(r.phone)}">${esc(r.phone)}</a>`:"—";const address=r.address?`<a class="address-link" target="_blank" rel="noopener noreferrer" href="${map(r.address)}" aria-label="在地圖開啟${esc(r.name)}地址">📍 ${esc(r.address)}</a>`:"—";return `<article class="school-card" style="animation-delay:${Math.min(i*18,260)}ms"><div class="card-top"><div><h3 class="school-name">${esc(r.name)}</h3><div class="badges"><span class="badge">${esc(r.district)}</span><span class="badge">${esc(r.category)}</span></div></div></div><div class="card-body"><div class="data-grid">${r.person1?infoItem(r.person1Label||"負責人／校長",esc(r.person1)):""}${r.person2?infoItem(r.person2Label||"園長／園主任",esc(r.person2)):""}${infoItem(r.capacityLabel||"核定數",esc(r.capacity||"—"))}${infoItem("電話",phone)}${infoItem("傳真",esc(r.fax||"—"))}${infoItem("地址",address,"full")}</div><div class="actions">${r.phone?`<a class="action-link" href="${tel(r.phone)}">📞 直接撥電話</a>`:""}${r.address?`<a class="action-link" target="_blank" rel="noopener noreferrer" href="${map(r.address)}">🗺️ 開啟地圖</a>`:""}</div></div></article>`}
-function filteredSchools(){const t=norm(els.q.value),d=els.district.value,c=els.category.value;return SCHOOLS.filter(r=>{const hay=norm([r.category,r.district,r.name,r.person1Label,r.person1,r.person2Label,r.person2,r.capacity,r.phone,r.fax,r.address].join(" "));return (!t||hay.includes(t))&&(!d||r.district===d)&&(!c||r.category===c)})}
-function renderPagination(totalPages){if(totalPages<=1){els.schoolPagination.innerHTML="";return}const items=[];const btn=(label,page,disabled=false,current=false,title="")=>`<button class="page-btn ${current?"current":""}" type="button" data-page="${page}" ${disabled?"disabled":""} ${current?'aria-current="page"':''} aria-label="${esc(title||`第 ${page} 頁`)}">${label}</button>`;items.push(btn("‹ 上一頁",schoolPage,schoolPage===1,false,"上一頁"));const pages=[];const add=p=>{if(!pages.includes(p))pages.push(p)};add(1);for(let p=schoolPage-2;p<=schoolPage+2;p++){if(p>1&&p<totalPages)add(p)}add(totalPages);let last=0;pages.forEach(p=>{if(last&&p-last>1)items.push('<span class="page-ellipsis" aria-hidden="true">…</span>');items.push(btn(String(p),p,false,p===schoolPage));last=p});items.push(btn("下一頁",schoolPage,schoolPage===totalPages,false,"下一頁"));els.schoolPagination.innerHTML=items.join("");els.schoolPagination.querySelectorAll("button[data-page]").forEach(b=>b.addEventListener("click",()=>{schoolPage=Number(b.dataset.page);renderSchools(true)}))}
-function renderSchools(scrollTop=false){const list=filteredSchools();const totalPages=Math.max(1,Math.ceil(list.length/PAGE_SIZE));schoolPage=Math.min(schoolPage,totalPages);const start=(schoolPage-1)*PAGE_SIZE;const visible=list.slice(start,start+PAGE_SIZE);els.count.textContent=list.length;els.pageStatus.textContent=list.length?`第 ${schoolPage} / ${totalPages} 頁　（第 ${start+1}–${Math.min(start+PAGE_SIZE,list.length)} 筆）`:"沒有資料";els.schoolCards.innerHTML=visible.map(schoolCard).join("");els.schoolEmpty.style.display=list.length?"none":"block";els.schoolCards.style.display=list.length?"grid":"none";renderPagination(totalPages);if(scrollTop)document.getElementById("schools-title").scrollIntoView({behavior:"smooth",block:"start"})}
-function renderConveners(){els.convList.innerHTML=CONVENERS.map(r=>`<article class="conv-card"><span class="type-tag">${esc(r.type)}</span><h3>${esc(r.school)}</h3><div class="conv-meta"><div><span class="data-label">行政區</span><span class="data-value">${esc(r.district)}</span></div><div><span class="data-label">姓名</span><span class="data-value">${esc(r.name)}</span></div><div><span class="data-label">電話</span><span class="data-value">${r.phone?`<a href="${tel(r.phone)}">${esc(r.phone)}</a>`:"—"}</span></div><div><span class="data-label">傳真</span><span class="data-value">${esc(r.fax||"—")}</span></div><div class="data-item full"><span class="data-label">地址</span><span class="data-value">${r.address?`<a target="_blank" rel="noopener noreferrer" href="${map(r.address)}">📍 ${esc(r.address)}</a>`:"—"}</span></div></div></article>`).join("")}
-function renderStaff(){const t=norm(els.staffQ.value),list=STAFF.filter(r=>!t||norm(Object.values(r).join(" ")).includes(t));els.staffCount.textContent=list.length;els.staffEmpty.style.display=list.length?"none":"block";els.staffList.style.display=list.length?"grid":"none";els.staffList.innerHTML=list.map(r=>`<article class="staff-card"><h3>${esc(r.duty)}</h3><div class="muted">承辦人：${esc(r.name)}</div><div class="ext">☎️ 分機 ${esc(r.ext)}</div></article>`).join("")}
-function activateTab(id){document.querySelectorAll(".tab").forEach(b=>{const active=b.dataset.tab===id;b.classList.toggle("active",active);b.setAttribute("aria-selected",String(active))});document.querySelectorAll(".panel").forEach(p=>p.classList.toggle("active",p.id===id));if(id!=="schools")document.getElementById(id).scrollIntoView({behavior:"smooth",block:"start"})}
+const SCHOOLS = JSON.parse(document.getElementById("schoolsData").textContent);
+const CONVENERS = JSON.parse(document.getElementById("convData").textContent);
+const STAFF = JSON.parse(document.getElementById("staffData").textContent);
+const PAGE_SIZE = 20;
+const els = {
+  q: document.getElementById("q"),
+  district: document.getElementById("district"),
+  category: document.getElementById("category"),
+  reset: document.getElementById("reset"),
+  schoolCards: document.getElementById("schoolCards"),
+  schoolEmpty: document.getElementById("schoolEmpty"),
+  count: document.getElementById("count"),
+  pageStatus: document.getElementById("pageStatus"),
+  schoolPagination: document.getElementById("schoolPagination"),
+  convList: document.getElementById("convList"),
+  convCount: document.getElementById("convCount"),
+  convPageStatus: document.getElementById("convPageStatus"),
+  convPagination: document.getElementById("convPagination"),
+  staffQ: document.getElementById("staffQ"),
+  staffList: document.getElementById("staffList"),
+  staffEmpty: document.getElementById("staffEmpty"),
+  staffCount: document.getElementById("staffCount"),
+  staffPagination: document.getElementById("staffPagination"),
+  topBtn: document.getElementById("topBtn")
+};
+const state = { schools: 1, conv: 1, staff: 1 };
+const norm = s => String(s ?? "").toLowerCase().replace(/[\s\-（）()]/g, "");
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
+const tel = s => "tel:" + String(s || "").replace(/[^0-9+]/g, "");
+const map = s => "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(s || "");
+function infoItem(label, value, cls="") { return `<div class="data-item ${cls}"><span class="data-label">${esc(label)}</span><span class="data-value">${value}</span></div>`; }
+function schoolCard(r, i) {
+  const phone = r.phone ? `<a href="${tel(r.phone)}" aria-label="撥打${esc(r.name)}電話 ${esc(r.phone)}">${esc(r.phone)}</a>` : "—";
+  const address = r.address ? `<a class="address-link" target="_blank" rel="noopener noreferrer" href="${map(r.address)}" aria-label="在地圖開啟${esc(r.name)}地址">📍 ${esc(r.address)}</a>` : "—";
+  return `<article class="school-card" style="animation-delay:${Math.min(i*16,260)}ms">
+    <div class="card-top"><h3 class="school-name">${esc(r.name)}</h3><div class="badges"><span class="badge">${esc(r.district)}</span><span class="badge">${esc(r.category)}</span></div></div>
+    <div class="card-body"><div class="data-grid">
+      ${r.person1 ? infoItem(r.person1Label || "負責人／校長", esc(r.person1)) : ""}
+      ${r.person2 ? infoItem(r.person2Label || "園長／園主任", esc(r.person2)) : ""}
+      ${infoItem(r.capacityLabel || "核定數", esc(r.capacity || "—"))}
+      ${infoItem("電話", phone)}${infoItem("傳真", esc(r.fax || "—"))}
+      ${infoItem("地址", address, "full")}
+    </div><div class="actions">
+      ${r.phone ? `<a class="action-link" href="${tel(r.phone)}">📞 直接撥電話</a>` : ""}
+      ${r.address ? `<a class="action-link" target="_blank" rel="noopener noreferrer" href="${map(r.address)}">🗺️ 開啟地圖</a>` : ""}
+    </div></div>
+  </article>`;
+}
+function convCard(r) {
+  return `<article class="conv-card"><span class="type-tag">${esc(r.type)}</span><h3>${esc(r.school)}</h3><div class="conv-meta">
+    <div><span class="data-label">行政區</span><span class="data-value">${esc(r.district)}</span></div>
+    <div><span class="data-label">姓名</span><span class="data-value">${esc(r.name)}</span></div>
+    <div><span class="data-label">電話</span><span class="data-value">${r.phone ? `<a href="${tel(r.phone)}">${esc(r.phone)}</a>` : "—"}</span></div>
+    <div><span class="data-label">傳真</span><span class="data-value">${esc(r.fax || "—")}</span></div>
+    <div class="full"><span class="data-label">地址</span><span class="data-value">${r.address ? `<a target="_blank" rel="noopener noreferrer" href="${map(r.address)}">📍 ${esc(r.address)}</a>` : "—"}</span></div>
+  </div></article>`;
+}
+function staffCard(r) {
+  const heading = r.name ? `${esc(r.duty)}` : `${esc(r.duty)}（分組）`;
+  return `<article class="staff-card"><h3>${heading}</h3>${r.name ? `<div class="muted">承辦人：${esc(r.name)}</div>` : `<div class="muted">此列為股別／分組標示</div>`}${r.ext ? `<div class="ext">☎️ 分機 ${esc(r.ext)}</div>` : ""}</article>`;
+}
+function pageItems(totalPages, current, previousLabel, nextLabel) {
+  if (totalPages <= 1) return "";
+  const out = [];
+  const btn = (label, page, disabled=false, currentPage=false, ariaLabel=label) => `<button class="page-btn ${currentPage ? "current" : ""}" type="button" data-page="${page}" ${disabled ? "disabled" : ""} ${currentPage ? "aria-current=\"page\"" : ""} aria-label="${esc(ariaLabel)}">${label}</button>`;
+  out.push(btn(`‹ ${previousLabel}`, current, current===1, false, previousLabel));
+  const pages=[];
+  const add=p=>{if(p>=1&&p<=totalPages&&!pages.includes(p))pages.push(p)};
+  add(1); for(let p=current-2;p<=current+2;p++) add(p); add(totalPages);
+  let last=0;
+  pages.forEach(p=>{if(last && p-last>1) out.push('<span class="page-ellipsis" aria-hidden="true">…</span>'); out.push(btn(String(p),p,false,p===current,`第 ${p} 頁`)); last=p;});
+  out.push(btn(`${nextLabel} ›`, current, current===totalPages, false, nextLabel));
+  return out.join("");
+}
+function bindPagination(root, key, renderer) {
+  root.querySelectorAll("button[data-page]").forEach(btn => btn.addEventListener("click", () => {
+    state[key] = Number(btn.dataset.page);
+    renderer(true);
+  }));
+}
+function filteredSchools() {
+  const t=norm(els.q.value), d=els.district.value, c=els.category.value;
+  return SCHOOLS.filter(r=>{
+    const hay=norm([r.category,r.district,r.name,r.person1Label,r.person1,r.person2Label,r.person2,r.capacity,r.phone,r.fax,r.address].join(" "));
+    return (!t||hay.includes(t))&&(!d||r.district===d)&&(!c||r.category===c);
+  });
+}
+function renderSchools(announce=true) {
+  const list=filteredSchools(), totalPages=Math.max(1,Math.ceil(list.length/PAGE_SIZE));
+  state.schools=Math.min(state.schools,totalPages);
+  const start=(state.schools-1)*PAGE_SIZE, visible=list.slice(start,start+PAGE_SIZE);
+  els.count.textContent=list.length;
+  els.pageStatus.textContent=list.length ? `第 ${state.schools} / ${totalPages} 頁　（第 ${start+1}–${Math.min(start+PAGE_SIZE,list.length)} 筆）` : "沒有符合條件的資料";
+  els.schoolCards.innerHTML=visible.map(schoolCard).join("");
+  els.schoolEmpty.style.display=list.length?"none":"block";
+  els.schoolCards.style.display=list.length?"grid":"none";
+  els.schoolPagination.innerHTML=pageItems(totalPages,state.schools,"上一頁","下一頁");
+  bindPagination(els.schoolPagination,"schools",renderSchools);
+  if(announce) document.getElementById("schools-title").scrollIntoView({behavior:"smooth",block:"start"});
+}
+function filteredConveners() {
+  return CONVENERS;
+}
+function renderConveners(announce=false) {
+  const list=filteredConveners(), totalPages=Math.max(1,Math.ceil(list.length/PAGE_SIZE));
+  state.conv=Math.min(state.conv,totalPages);
+  const start=(state.conv-1)*PAGE_SIZE, visible=list.slice(start,start+PAGE_SIZE);
+  els.convCount.textContent=list.length;
+  els.convPageStatus.textContent=list.length ? `第 ${state.conv} / ${totalPages} 頁　（第 ${start+1}–${Math.min(start+PAGE_SIZE,list.length)} 筆）` : "沒有資料";
+  els.convList.innerHTML=visible.map(convCard).join("");
+  els.convPagination.innerHTML=pageItems(totalPages,state.conv,"上一頁","下一頁");
+  bindPagination(els.convPagination,"conv",renderConveners);
+  if(announce) document.getElementById("conv-title").scrollIntoView({behavior:"smooth",block:"start"});
+}
+function renderStaff(announce=false) {
+  const t=norm(els.staffQ.value), list=STAFF.filter(r=>!t||norm(Object.values(r).join(" ")).includes(t));
+  const totalPages=Math.max(1,Math.ceil(list.length/PAGE_SIZE));
+  state.staff=Math.min(state.staff,totalPages);
+  const start=(state.staff-1)*PAGE_SIZE, visible=list.slice(start,start+PAGE_SIZE);
+  els.staffCount.textContent=list.length;
+  els.staffList.innerHTML=visible.map(staffCard).join("");
+  els.staffEmpty.style.display=list.length?"none":"block";
+  els.staffList.style.display=list.length?"grid":"none";
+  els.staffPagination.innerHTML=pageItems(totalPages,state.staff,"上一頁","下一頁");
+  bindPagination(els.staffPagination,"staff",renderStaff);
+  if(announce) document.getElementById("staff-title").scrollIntoView({behavior:"smooth",block:"start"});
+}
+function activateTab(id){
+  document.querySelectorAll(".tab").forEach(b=>{const active=b.dataset.tab===id;b.classList.toggle("active",active);b.setAttribute("aria-selected",String(active));b.setAttribute("tabindex",active?"0":"-1")});
+  document.querySelectorAll(".panel").forEach(p=>p.classList.toggle("active",p.id===id));
+  const heading=document.getElementById(id+"-title"); if(heading) heading.scrollIntoView({behavior:"smooth",block:"start"});
+}
 document.querySelectorAll(".tab").forEach(b=>b.addEventListener("click",()=>activateTab(b.dataset.tab)));
-els.q.addEventListener("input",()=>{schoolPage=1;renderSchools(false)});els.district.addEventListener("change",()=>{schoolPage=1;renderSchools(false)});els.category.addEventListener("change",()=>{schoolPage=1;renderSchools(false)});
-els.reset.addEventListener("click",()=>{els.q.value="";els.district.value="";els.category.value="";schoolPage=1;renderSchools(false);els.q.focus()});
-els.staffQ.addEventListener("input",renderStaff);
-window.addEventListener("scroll",()=>{els.topBtn.classList.toggle("show",window.scrollY>420)},{passive:true});
+document.querySelectorAll(".tab").forEach(b=>b.addEventListener("keydown",e=>{if(e.key!=="ArrowRight"&&e.key!=="ArrowLeft")return;e.preventDefault();const tabs=[...document.querySelectorAll(".tab")];const i=tabs.indexOf(b);const n=e.key==="ArrowRight"?(i+1)%tabs.length:(i-1+tabs.length)%tabs.length;tabs[n].focus();tabs[n].click();}));
+els.q.addEventListener("input",()=>{state.schools=1;renderSchools(false)});
+els.district.addEventListener("change",()=>{state.schools=1;renderSchools(false)});
+els.category.addEventListener("change",()=>{state.schools=1;renderSchools(false)});
+els.reset.addEventListener("click",()=>{els.q.value="";els.district.value="";els.category.value="";state.schools=1;renderSchools(false);els.q.focus()});
+els.staffQ.addEventListener("input",()=>{state.staff=1;renderStaff(false)});
+window.addEventListener("scroll",()=>els.topBtn.classList.toggle("show",window.scrollY>420),{passive:true});
 els.topBtn.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"}));
-renderSchools(false);renderConveners();renderStaff();
+renderSchools(false);renderConveners(false);renderStaff(false);
 </script>
 </body>
 </html>
