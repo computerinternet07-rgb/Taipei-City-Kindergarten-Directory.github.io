@@ -10,195 +10,107 @@
   <style>
     :root{
       --bg:#07101f;
-      --bg2:#0d1730;
-      --line:rgba(255,255,255,.12);
-      --shadow:0 24px 80px rgba(0,0,0,.38);
-      --radius:0;
-      --frame-max:none;
     }
 
-    *{box-sizing:border-box}
-
-    html,body{
-      margin:0;
+    html,
+    body{
       width:100%;
       height:100%;
-      min-height:100%;
+      margin:0;
+      padding:0;
+      background:var(--bg);
       overflow:hidden;
-      background:var(--bg)
+    }
+
+    *{
+      box-sizing:border-box;
     }
 
     body{
-      overflow-x:hidden;
       font-family:"Microsoft JhengHei","Noto Sans TC",system-ui,sans-serif;
       -webkit-user-select:none;
       user-select:none;
       -webkit-touch-callout:none;
     }
 
-    body::before{
-      content:"";
-      position:fixed;
-      inset:-15%;
-      pointer-events:none;
-      z-index:0;
-      background:
-        radial-gradient(circle at 12% 20%,rgba(71,121,255,.30),transparent 22%),
-        radial-gradient(circle at 86% 18%,rgba(143,87,255,.24),transparent 20%),
-        radial-gradient(circle at 48% 92%,rgba(0,205,255,.14),transparent 24%);
-      filter:blur(10px);
-      animation:aurora 14s ease-in-out infinite alternate;
-    }
-
-    .stars{
+    /*
+     * 外層只負責承載 GAS iframe。
+     * 不再建立額外 page / shell 高度、margin、padding，
+     * 避免瀏覽器產生第二條垂直或水平捲軸。
+     */
+    #gasFrame{
       position:fixed;
       inset:0;
-      z-index:0;
-      pointer-events:none;
-      opacity:.45;
-      background-image:
-        radial-gradient(circle at 10% 20%,#fff 0 1px,transparent 1.7px),
-        radial-gradient(circle at 32% 72%,#fff 0 .8px,transparent 1.5px),
-        radial-gradient(circle at 58% 30%,#fff 0 1px,transparent 1.7px),
-        radial-gradient(circle at 82% 64%,#fff 0 .8px,transparent 1.5px);
-      background-size:250px 250px,310px 310px,290px 290px,340px 340px;
-      animation:starMove 55s linear infinite;
-    }
-
-    .page{
-      position:relative;
-      z-index:1;
-      width:100%;
-      width:100%;
-      height:100dvh;
-      min-height:100vh;
       display:block;
+      width:100%;
+      height:100%;
+      min-width:100%;
+      min-height:100%;
+      margin:0;
       padding:0;
-      overflow:hidden;
-    }
-
-    .shell{
-      width:100%;
-      height:100%;
-      min-height:100%;
-      position:relative;
       border:0;
-      border-radius:0;
-      overflow:hidden;
-      background:rgba(7,13,28,.58);
-      box-shadow:none;
-      backdrop-filter:blur(18px);
-      -webkit-backdrop-filter:blur(18px);
-      transform:translateZ(0);
-    }
-
-    .shell::before{
-      content:"";
-      position:absolute;
-      z-index:3;
-      left:-30%;
-      top:0;
-      width:32%;
-      height:2px;
-      background:linear-gradient(90deg,transparent,#fff,transparent);
-      filter:drop-shadow(0 0 10px rgba(255,255,255,.8));
-      animation:scan 9s ease-in-out infinite;
-      pointer-events:none;
-    }
-
-    iframe{
-      display:block;
-      width:100%;
-      height:100%;
-      min-height:100%;
-      border:0;
+      outline:0;
       background:#fff;
-      opacity:0;
-      transform:scale(.985);
-      transition:opacity .45s ease, transform .45s ease;
-    }
-
-    iframe.ready{
+      overflow:hidden;
       opacity:1;
-      transform:scale(1);
+      transform:none;
     }
 
-    @keyframes aurora{
-      from{transform:translate3d(-1%,0,0) scale(1)}
-      to{transform:translate3d(1.5%,-1%,0) scale(1.04)}
-    }
-
-    @keyframes starMove{
-      to{transform:translate3d(-45px,-60px,0)}
-    }
-
-    @keyframes scan{
-      0%{left:-32%;opacity:0}
-      12%{opacity:1}
-      32%,100%{left:132%;opacity:0}
+    /*
+     * 只保留非常輕量的背景；iframe 覆蓋整個視窗後不會干擾使用。
+     * 不再有 Loader、LOADING、淡入、縮放或框架動畫。
+     */
+    .bg{
+      position:fixed;
+      inset:0;
+      z-index:-1;
+      pointer-events:none;
+      overflow:hidden;
+      background:
+        radial-gradient(circle at 12% 20%,rgba(71,121,255,.18),transparent 22%),
+        radial-gradient(circle at 86% 18%,rgba(143,87,255,.14),transparent 20%),
+        radial-gradient(circle at 48% 92%,rgba(0,205,255,.10),transparent 24%),
+        var(--bg);
     }
 
     @media (max-width:900px){
-      .page{width:100%;height:100dvh;min-height:100dvh;padding:0;overflow:hidden}
+      html,
+      body{
+        width:100%;
+        height:100%;
+        min-height:100%;
+        overflow:hidden;
+      }
 
-      .shell{
+      #gasFrame{
+        position:fixed;
+        inset:0;
         width:100%;
         height:100dvh;
+        min-width:100%;
         min-height:100dvh;
-        border:0;
-        border-radius:0;
-      }
-    }
-
-    @media (max-width:560px){
-      .shell{border-radius:0}
-
-    @media (prefers-reduced-motion:reduce){
-      *,*::before,*::after{
-        animation:none!important;
-        transition:none!important
       }
     }
   </style>
 </head>
 
 <body>
-  <div class="stars" aria-hidden="true"></div>
+  <div class="bg" aria-hidden="true"></div>
 
-  <main class="page">
-    <section class="shell" aria-label="臺北市幼兒園聯絡資料查詢">
-      </div>
-        <div class="loader-text">LOADING</div>
-      </div>
-
-      <iframe
-        id="gasFrame"
-        title="臺北市幼兒園聯絡資料查詢"
-        loading="eager"
-        referrerpolicy="strict-origin-when-cross-origin"
-        allow="clipboard-read; clipboard-write"
-      ></iframe>
-    </section>
-  </main>
+  <iframe
+    id="gasFrame"
+    title="臺北市幼兒園聯絡資料查詢"
+    src="https://script.google.com/macros/s/AKfycbyXNfhSoxgN7wyg3VkcemoHmYxn6l1YSdg7qDffJ2o9-Nc1CoYMzDKw9IdA6s3FN0Zf/exec"
+    loading="eager"
+    referrerpolicy="strict-origin-when-cross-origin"
+    allow="clipboard-read; clipboard-write">
+  </iframe>
 
   <script>
     (function(){
       "use strict";
 
-      var p1 = "https://script.";
-      var p2 = "google.com/macros/s/";
-      var p3 = "AKfycbyXNfhSoxgN7wyg3VkcemoHmYxn6l1YSdg7qDffJ2o9-Nc1CoYMzDKw9IdA6s3FN0Zf";
-      var p4 = "/exec";
-      var target = p1 + p2 + p3 + p4;
-
-      var frame = document.getElementById("gasFrame");
-frame.src = target;
-
-      frame.addEventListener("load", function(){
-          frame.classList.add("ready");
-      });
-
-      /* 阻擋 GitHub 外層頁面的右鍵與部分常見檢視快捷鍵。 */
+      /* 阻擋外層頁面的右鍵與部分常見檢視快捷鍵。 */
       document.addEventListener("contextmenu", function(e){
         e.preventDefault();
       }, {passive:false});
@@ -225,30 +137,6 @@ frame.src = target;
           e.stopPropagation();
         }
       }, {capture:true});
-
-      /* 滑鼠在外框上形成細微 3D 浮動 */
-      var shell = document.querySelector(".shell");
-      var canTilt = window.matchMedia("(pointer:fine)").matches;
-
-      if(canTilt){
-        shell.addEventListener("pointermove", function(e){
-          var r = shell.getBoundingClientRect();
-          var x = (e.clientX - r.left) / r.width - .5;
-          var y = (e.clientY - r.top) / r.height - .5;
-
-          shell.style.transform =
-            "perspective(1800px) rotateX(" +
-            (-y * 1.25) +
-            "deg) rotateY(" +
-            (x * 1.25) +
-            "deg) translateZ(0)";
-        });
-
-        shell.addEventListener("pointerleave", function(){
-          shell.style.transform =
-            "perspective(1800px) rotateX(0deg) rotateY(0deg) translateZ(0)";
-        });
-      }
     })();
   </script>
 </body>
