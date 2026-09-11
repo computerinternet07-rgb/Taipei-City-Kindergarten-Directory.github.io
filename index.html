@@ -22,7 +22,9 @@
     html,body{
       margin:0;
       width:100%;
+      height:100%;
       min-height:100%;
+      overflow:hidden;
       background:var(--bg)
     }
 
@@ -67,15 +69,18 @@
       position:relative;
       z-index:1;
       width:100%;
+      width:100%;
+      height:100dvh;
       min-height:100vh;
       display:block;
       padding:0;
+      overflow:hidden;
     }
 
     .shell{
       width:100%;
-      height:100vh;
-      min-height:100vh;
+      height:100%;
+      min-height:100%;
       position:relative;
       border:0;
       border-radius:0;
@@ -101,79 +106,11 @@
       pointer-events:none;
     }
 
-    .loader{
-      position:absolute;
-      inset:0;
-      z-index:5;
-      display:grid;
-      place-items:center;
-      background:
-        radial-gradient(circle at 50% 40%,rgba(72,116,255,.18),transparent 22%),
-        linear-gradient(180deg,#071021,#0a1122);
-      transition:opacity .35s ease, visibility .35s ease;
-    }
-
-    .loader.done{
-      opacity:0;
-      visibility:hidden;
-      pointer-events:none;
-    }
-
-    .loader-core{
-      width:96px;
-      height:96px;
-      position:relative;
-      border-radius:50%;
-      border:1px solid rgba(255,255,255,.18);
-      box-shadow:
-        0 0 45px rgba(74,113,255,.25),
-        inset 0 0 30px rgba(119,89,255,.16);
-      animation:coreFloat 2.4s ease-in-out infinite;
-    }
-
-    .loader-core::before,
-    .loader-core::after{
-      content:"";
-      position:absolute;
-      inset:17px;
-      border-radius:50%;
-      border:1px solid rgba(255,255,255,.15);
-    }
-
-    .loader-core::after{
-      inset:-12px;
-      border-style:dashed;
-      animation:spin 5s linear infinite;
-    }
-
-    .loader-dot{
-      position:absolute;
-      width:12px;
-      height:12px;
-      left:42px;
-      top:42px;
-      border-radius:50%;
-      background:#fff;
-      box-shadow:
-        0 0 24px rgba(255,255,255,.95),
-        0 0 60px rgba(85,129,255,.75);
-    }
-
-    .loader-text{
-      position:absolute;
-      top:calc(50% + 72px);
-      left:0;
-      right:0;
-      text-align:center;
-      color:rgba(255,255,255,.82);
-      font-size:15px;
-      letter-spacing:.16em;
-    }
-
     iframe{
       display:block;
       width:100%;
       height:100%;
+      min-height:100%;
       border:0;
       background:#fff;
       opacity:0;
@@ -201,21 +138,8 @@
       32%,100%{left:132%;opacity:0}
     }
 
-    @keyframes coreFloat{
-      0%,100%{transform:translateY(0) rotateX(0deg) rotateY(0deg)}
-      50%{transform:translateY(-7px) rotateX(8deg) rotateY(-12deg)}
-    }
-
-    @keyframes spin{
-      to{transform:rotate(360deg)}
-    }
-
     @media (max-width:900px){
-      .page{
-        width:100%;
-        min-height:100dvh;
-        padding:0;
-      }
+      .page{width:100%;height:100dvh;min-height:100dvh;padding:0;overflow:hidden}
 
       .shell{
         width:100%;
@@ -228,10 +152,6 @@
 
     @media (max-width:560px){
       .shell{border-radius:0}
-      .loader-core{width:82px;height:82px}
-      .loader-dot{left:35px;top:35px}
-      .loader-text{top:calc(50% + 62px);font-size:13px}
-    }
 
     @media (prefers-reduced-motion:reduce){
       *,*::before,*::after{
@@ -247,10 +167,7 @@
 
   <main class="page">
     <section class="shell" aria-label="臺北市幼兒園聯絡資料查詢">
-      <div id="loader" class="loader" aria-live="polite">
-        <div class="loader-core" aria-hidden="true">
-          <div class="loader-dot"></div>
-        </div>
+      </div>
         <div class="loader-text">LOADING</div>
       </div>
 
@@ -275,18 +192,10 @@
       var target = p1 + p2 + p3 + p4;
 
       var frame = document.getElementById("gasFrame");
-      var loader = document.getElementById("loader");
-
-      frame.src = target;
+frame.src = target;
 
       frame.addEventListener("load", function(){
-        requestAnimationFrame(function(){
           frame.classList.add("ready");
-
-          setTimeout(function(){
-            loader.classList.add("done");
-          }, 120);
-        });
       });
 
       /* 阻擋 GitHub 外層頁面的右鍵與部分常見檢視快捷鍵。 */
