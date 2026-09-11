@@ -12,9 +12,9 @@
       --bg:#07101f;
       --bg2:#0d1730;
       --line:rgba(255,255,255,.12);
-      --shadow:0 24px 80px rgba(0,0,0,.38);
-      --radius:24px;
-      --frame-max:1600px;
+      --shadow:none;
+      --radius:0;
+      --frame-max:none;
     }
 
     *{box-sizing:border-box}
@@ -59,26 +59,22 @@
     .page{
       position:relative;
       z-index:1;
+      width:100%;
       min-height:100vh;
-      display:grid;
-      place-items:center;
-      padding:
-        max(10px, env(safe-area-inset-top))
-        max(10px, env(safe-area-inset-right))
-        max(10px, env(safe-area-inset-bottom))
-        max(10px, env(safe-area-inset-left));
+      display:block;
+      padding:0;
     }
 
     .shell{
-      width:min(var(--frame-max), 100%);
-      height:calc(100vh - 20px);
-      min-height:560px;
+      width:100%;
+      height:100vh;
+      min-height:100vh;
       position:relative;
-      border:1px solid var(--line);
-      border-radius:var(--radius);
+      border:0;
+      border-radius:0;
       overflow:hidden;
       background:rgba(7,13,28,.58);
-      box-shadow:var(--shadow);
+      box-shadow:none;
       backdrop-filter:blur(18px);
       -webkit-backdrop-filter:blur(18px);
       transform:translateZ(0);
@@ -195,14 +191,17 @@
     @keyframes spin{to{transform:rotate(360deg)}}
 
     @media (max-width:900px){
-      .page{padding:0}
+      .page{
+        width:100%;
+        min-height:100dvh;
+        padding:0;
+      }
       .shell{
         width:100%;
         height:100dvh;
         min-height:100dvh;
+        border:0;
         border-radius:0;
-        border-left:0;
-        border-right:0;
       }
     }
 
@@ -230,7 +229,7 @@
         </div>
         <div class="loader-text">LOADING</div>
       </div>
-      
+
       <iframe
         id="gasFrame"
         title="臺北市幼兒園聯絡資料查詢"
@@ -264,7 +263,7 @@
         });
       });
 
-      /* 阻擋 GitHub 外層頁面的右鍵與部分常見檢視快捷鍵。 */
+      /* 阻擋外層頁面的右鍵與部分常見檢視快捷鍵。 */
       document.addEventListener("contextmenu", function(e){
         e.preventDefault();
       }, {passive:false});
